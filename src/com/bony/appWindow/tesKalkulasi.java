@@ -20,10 +20,10 @@ public class tesKalkulasi {
     public static void main(String[] args) {
         
         DetailPengiriman detail = new DetailPengiriman();
-        detail.setAsuransi(true);
-        detail.setBeratPaket(2.0);
+        detail.setAsuransi(false);
+        detail.setBeratPaket(3.0);
         detail.setJasaPengiriman("Reguler");
-        detail.setKotaTujuan("semarang");
+        detail.setKotaTujuan("bandung");
         detail.setHargaPaket(200000.0);
         
         hitungPaketDAO hitung = new hitungPaketDAO();

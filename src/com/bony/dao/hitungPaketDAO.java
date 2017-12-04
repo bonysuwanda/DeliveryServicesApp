@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class hitungPaketDAO {
 
-    final double asuransi = 0.003;
+    final double asuransi = 0.03;
 
     public double hitungBiaya(DetailPengiriman detail) {
         double total = 0.0;
@@ -29,7 +29,7 @@ public class hitungPaketDAO {
         for (DataPaket dataPaket : hargaPaket) {
 
             if (dataPaket.getTujuanPengiriman().equalsIgnoreCase(detail.getKotaTujuan())) {
-                if (detail.getJasaPengiriman().equalsIgnoreCase("Reguler")) {
+                if (detail.getJasaPengiriman().equalsIgnoreCase("reguler")) {
                     hargaPengiriman = dataPaket.getRegulerServices();
                     if (detail.isAsuransi()) {
                         total = (hargaPengiriman * berat) + (harga * asuransi);
@@ -40,7 +40,7 @@ public class hitungPaketDAO {
             }
 
             if (dataPaket.getTujuanPengiriman().equalsIgnoreCase(detail.getKotaTujuan())) {
-                if (detail.getJasaPengiriman().equalsIgnoreCase("Kilat")) {
+                if (detail.getJasaPengiriman().equalsIgnoreCase("kilat")) {
                     hargaPengiriman = dataPaket.getKilatServices();
                     if (detail.isAsuransi()) {
                         total = (hargaPengiriman * berat) + (harga * asuransi);
@@ -51,7 +51,7 @@ public class hitungPaketDAO {
             }
 
             if (dataPaket.getTujuanPengiriman().equalsIgnoreCase(detail.getKotaTujuan())) {
-                if (detail.getJasaPengiriman().equalsIgnoreCase("SDS")) {
+                if (detail.getJasaPengiriman().equalsIgnoreCase("sds")) {
                     hargaPengiriman = dataPaket.getSameDayServices();
                     if (detail.isAsuransi()) {
                         total = (hargaPengiriman * berat) + (harga * asuransi);
@@ -62,7 +62,7 @@ public class hitungPaketDAO {
             }
 
             if (dataPaket.getTujuanPengiriman().equalsIgnoreCase(detail.getKotaTujuan())) {
-                if (detail.getJasaPengiriman().equalsIgnoreCase("ONS")) {
+                if (detail.getJasaPengiriman().equalsIgnoreCase("ons")) {
                     hargaPengiriman = dataPaket.getOneNightServices();
                     if (detail.isAsuransi()) {
                         total = (hargaPengiriman * berat) + (harga * asuransi);
@@ -72,7 +72,7 @@ public class hitungPaketDAO {
                 }
             }
             if (dataPaket.getTujuanPengiriman().equalsIgnoreCase(detail.getKotaTujuan())) {
-                if (detail.getJasaPengiriman().equalsIgnoreCase("HDS")) {
+                if (detail.getJasaPengiriman().equalsIgnoreCase("hds")) {
                     hargaPengiriman = dataPaket.getHolidayServices();
                     if (detail.isAsuransi()) {
                         total = (hargaPengiriman * berat) + (harga * asuransi);

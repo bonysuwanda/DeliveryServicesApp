@@ -6,10 +6,13 @@
 package com.bony.appWindow;
 
 
+import com.bony.dao.hitungPaketDAO;
+import com.bony.dao.tarifPaketDAO;
 import com.bony.entity.DataPaket;
 import com.bony.entity.DetailPengiriman;
 import com.bony.entity.Pengirim;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,15 +23,18 @@ public class windowApp extends javax.swing.JFrame {
     List<DataPaket> paket;
     DetailPengiriman detail;
     Pengirim pengirim;
+    hitungPaketDAO hitung;
+    int indexKotaTujuan;
+    boolean pilihan;
     
     
-    String nomor;
-
     /**
      * Creates new form windowApp
      */
     public windowApp() {
         initComponents();
+        detail = new DetailPengiriman();
+        hitung = new hitungPaketDAO();
     }
     
     /**
@@ -40,6 +46,7 @@ public class windowApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -383,6 +390,7 @@ public class windowApp extends javax.swing.JFrame {
 
         jLabel25.setText("Tinggi");
 
+        buttonGroup1.add(asuransiYesRadioButton);
         asuransiYesRadioButton.setText("YA");
         asuransiYesRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -390,6 +398,7 @@ public class windowApp extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(asuransiNoRadioButton);
         asuransiNoRadioButton.setText("TIDAK");
         asuransiNoRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -771,19 +780,22 @@ public class windowApp extends javax.swing.JFrame {
     }//GEN-LAST:event_kotaAsalComboBoxActionPerformed
 
     private void kotaTujuanComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kotaTujuanComboBoxActionPerformed
-//        String tujuan = (String) kotaTujuanComboBox.getSelectedItem();
-//        LabelTujuan.setText(tujuan);
+//           Object ob = (Object) kotaTujuanComboBox.getSelectedItem();
+//           indexKotaTujuan = kotaTujuanComboBox.getSelectedIndex();
+//           detail.setKotaTujuan(kotaTujuanComboBox.getSelectedItem().toString());
+//           LabelTujuan.setText(ob.toString());
     }//GEN-LAST:event_kotaTujuanComboBoxActionPerformed
 
     private void asuransiYesRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asuransiYesRadioButtonActionPerformed
         if (asuransiYesRadioButton.isSelected()) {           
-            detail.setAsuransi(true);
-            
+            pilihan = true;
+            detail.setAsuransi(true);            
         }
     }//GEN-LAST:event_asuransiYesRadioButtonActionPerformed
 
     private void asuransiNoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asuransiNoRadioButtonActionPerformed
         if (asuransiNoRadioButton.isSelected()) {
+            pilihan = false;
             detail.setAsuransi(false);
         }
     }//GEN-LAST:event_asuransiNoRadioButtonActionPerformed
@@ -803,10 +815,31 @@ public class windowApp extends javax.swing.JFrame {
        String layanan = (String) jenisLayananComboBox.getSelectedItem();        //jenis layanan combo
        LabelJenisPaket.setText(layanan); 
        
-       String tujuan = (String) kotaTujuanComboBox.getSelectedItem();           //tujuan combo
-       LabelTujuan.setText(tujuan);
+       Object ob = (Object) kotaTujuanComboBox.getSelectedItem();
+       indexKotaTujuan = kotaTujuanComboBox.getSelectedIndex();
+       detail.setKotaTujuan(kotaTujuanComboBox.getSelectedItem().toString());
+       LabelTujuan.setText(ob.toString());
        
-      
+       try{
+           if(asuransiNoRadioButton.isSelected()){
+             detail.setBeratPaket(Double.parseDouble(beratBarangTextField.getText()));
+               detail.setJasaPengiriman(jenisLayananComboBox.getSelectedItem().toString());
+                Double total = hitung.hitungBiaya(detail);
+                totalLabel.setText(""+total);  
+           } else {
+               detail.setHargaPaket(Double.parseDouble(hargaBarangTextField.getText()));
+               detail.setBeratPaket(Double.parseDouble(beratBarangTextField.getText()));
+               detail.setJasaPengiriman(jenisLayananComboBox.getSelectedItem().toString());
+                Double total = hitung.hitungBiaya(detail);
+                totalLabel.setText(""+total);
+           }
+           
+           
+           
+       }catch (Exception e){
+           JOptionPane.showMessageDialog(rootPane, "Data Error");
+           e.printStackTrace();
+       }
        
     }//GEN-LAST:event_submitButtonActionPerformed
 
@@ -894,6 +927,7 @@ public class windowApp extends javax.swing.JFrame {
     private javax.swing.JRadioButton asuransiYesRadioButton;
     private javax.swing.JTextField beratBarangTextField;
     private javax.swing.JLabel beratPaketLabel;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel hargaBarangLabel;
     private javax.swing.JTextField hargaBarangTextField;
     private javax.swing.JLabel jLabel1;
@@ -962,4 +996,12 @@ public class windowApp extends javax.swing.JFrame {
     private javax.swing.JTextField telefonPengirimTextField;
     private javax.swing.JLabel totalLabel;
     // End of variables declaration//GEN-END:variables
+
+    private String totalLabel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private String totalCost() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
