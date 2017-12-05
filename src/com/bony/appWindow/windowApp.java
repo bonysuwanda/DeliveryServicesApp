@@ -8,6 +8,7 @@ package com.bony.appWindow;
 
 import com.bony.dao.hitungPaketDAO;
 import com.bony.dao.tarifPaketDAO;
+import com.bony.dao.nomorPaket;
 import com.bony.entity.DataPaket;
 import com.bony.entity.DetailPengiriman;
 import com.bony.entity.Pengirim;
@@ -820,6 +821,9 @@ public class windowApp extends javax.swing.JFrame {
        detail.setKotaTujuan(kotaTujuanComboBox.getSelectedItem().toString());
        LabelTujuan.setText(ob.toString());
        
+       nomorPaket nopak = new nomorPaket();
+       noPaketTextField.setText(nopak.generateResiNumber());
+       
        try{
            if(asuransiNoRadioButton.isSelected()){
              detail.setBeratPaket(Double.parseDouble(beratBarangTextField.getText()));
@@ -834,10 +838,7 @@ public class windowApp extends javax.swing.JFrame {
                 Double total = hitung.hitungBiaya(detail);
                 asuransiLabel.setText("Iya");
                 totalLabel.setText(""+total);
-           }
-           
-           
-           
+           }     
        }catch (Exception e){
            JOptionPane.showMessageDialog(rootPane, "Data Error");
            e.printStackTrace();
@@ -867,7 +868,7 @@ public class windowApp extends javax.swing.JFrame {
     }//GEN-LAST:event_telefonPenerimaTextFieldActionPerformed
 
     private void noPaketTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noPaketTextFieldActionPerformed
-               
+
     }//GEN-LAST:event_noPaketTextFieldActionPerformed
 
     private void beratBarangTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beratBarangTextFieldActionPerformed
