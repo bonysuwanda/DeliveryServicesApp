@@ -823,14 +823,16 @@ public class windowApp extends javax.swing.JFrame {
        try{
            if(asuransiNoRadioButton.isSelected()){
              detail.setBeratPaket(Double.parseDouble(beratBarangTextField.getText()));
-               detail.setJasaPengiriman(jenisLayananComboBox.getSelectedItem().toString());
-                Double total = hitung.hitungBiaya(detail);
-                totalLabel.setText(""+total);  
+             detail.setJasaPengiriman(jenisLayananComboBox.getSelectedItem().toString());
+             asuransiLabel.setText("Tidak");
+             Double total = hitung.hitungBiaya(detail);
+             totalLabel.setText(""+total);  
            } else {
                detail.setHargaPaket(Double.parseDouble(hargaBarangTextField.getText()));
                detail.setBeratPaket(Double.parseDouble(beratBarangTextField.getText()));
                detail.setJasaPengiriman(jenisLayananComboBox.getSelectedItem().toString());
                 Double total = hitung.hitungBiaya(detail);
+                asuransiLabel.setText("Iya");
                 totalLabel.setText(""+total);
            }
            
